@@ -1,6 +1,0 @@
-[client]
-database = frendy_db_staging
-user = staging_read_user
-password = kqh6HXs8Sqz
-port = 3309
-default-character-set = utf8
