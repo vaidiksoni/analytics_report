@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>sale_order</head>>
+<body>
+{% if sale_ord_obj %}
+{% for i in sale_ord_obj %}
+{{ i.status }} <br>
+    {{ i.created_by_id }} <br>
+    {{ i.primary_category }} <br>
+    {{ i.root_category }} <br>
+
+{% endfor %}
+{% endif %}
+
+</body>
+
+</html>
