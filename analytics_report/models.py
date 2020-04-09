@@ -1,7 +1,10 @@
+# Import the modules
 from django.db import models
+from jsonfield import JSONField
+
+
 
 # Create your models here.
-
 class SaleOrder(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     related_opd_master_id = models.IntegerField(blank=True, null=True)
@@ -56,7 +59,7 @@ class SaleOrder(models.Model):
     cgst = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     igst = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     round_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    extra_info = models.TextField(blank=True, null=True)  # This field type is a guess.
+    extra_info = JSONField(blank=True, null =True)  # TextField == This field type is a guess.
     status_activity = models.TextField(blank=True, null=True)  # This field type is a guess.
     user_profile_name = models.CharField(max_length=255, blank=True, null=True)
     keep_star_order = models.IntegerField(blank=True, null=True)
@@ -122,5 +125,4 @@ class SaleOrderItem(models.Model):
         db_table = 'sale_order_item'
     def __str__(self):
         return self.primary_category
-
 
