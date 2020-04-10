@@ -1,14 +1,13 @@
 from django.shortcuts import render
-from .models import SaleOrder, SaleOrderItem
 from analytics_report.utility_functions import daily_report
 import datetime
 from django.core.mail import EmailMessage
-# from django.http import /*
+
 # Create your views here.
 import os
 import logging
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-required_date = datetime.date.today()
+
 def send_mail(request):
     try:
         required_date = datetime.date.today()

@@ -126,3 +126,5 @@ class SaleOrderItem(models.Model):
     def __str__(self):
         return self.primary_category
 
+
+

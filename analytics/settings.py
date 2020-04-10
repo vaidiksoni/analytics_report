@@ -27,13 +27,13 @@ SECRET_KEY = 'd(ilyjf1(t!i1&ab6d+qtv+!nrl0_r%u!h_j%m55&ry2w^0(p='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['10-0-4-23.ap-south-1.compute.internal']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-
+    'django_crontab',
     'analytics_report',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -136,7 +136,7 @@ EMAIL_HOST_USER = 'vaidik.s@frendy.in'
 EMAIL_HOST_PASSWORD = '#vaidik123'
 EMAIL_PORT = 587
 
-CRONJOBS = ['* * * * *','analytics_report.cron.daily_report_cron_job'] # analytics_report.cron.daily_report_job
+CRONJOBS = ['0 3 * * *','analytics_report.cron.daily_report_cron_job'] # analytics_report.cron.daily_report_job
 
 
 # Static files (CSS, JavaScript, Images)

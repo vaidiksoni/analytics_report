@@ -8,7 +8,7 @@ def daily_report_cron_job():
         required_date = datetime.date.today()
         daily_report(required_date=required_date)
         mail = EmailMessage("Daily Report: Sale Performance","Please find the report.","vaidik.s@frendy.in",
-                            ["kaumil.t@frendy.in"])
+                            ["kaumil.t@frendy.in", "nishi.g@frendy.in","gowrav@frendy.in","hiren.p@frendy.in"])
 
         with open(str(required_date)+'.csv') as f:
             data = f.read()
