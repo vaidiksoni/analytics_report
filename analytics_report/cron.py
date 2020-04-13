@@ -20,3 +20,4 @@ def daily_report_cron_job():
 
     except Exception as e:
         logging.exception("Exception thrown: ", e)
+        print('Exception thrown: ', e)
