@@ -136,7 +136,7 @@ EMAIL_HOST_USER = 'vaidik.s@frendy.in'
 EMAIL_HOST_PASSWORD = '#vaidik123'
 EMAIL_PORT = 587
 
-CRONJOBS = ['0 3 * * *','analytics_report.cron.daily_report_cron_job'] # analytics_report.cron.daily_report_job
+CRONJOBS = ['0 12 * * *','analytics_report.cron.daily_report_cron_job'] # analytics_report.cron.daily_report_job
 
 
 # Static files (CSS, JavaScript, Images)
