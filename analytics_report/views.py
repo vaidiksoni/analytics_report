@@ -2,10 +2,11 @@ from django.shortcuts import render
 from analytics_report.utility_functions import daily_report
 import datetime
 from django.core.mail import EmailMessage
-
-# Create your views here.
+from analytics_report.config import *
 import os
 import logging
+# Create your views here.
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def send_daily_report(request):
@@ -13,8 +14,8 @@ def send_daily_report(request):
         required_date = datetime.date.today()
         daily_report(required_date=required_date)
         mail = EmailMessage("Daily Report: Sale Performance","Please find the report dated: " + str(required_date),
-                            "vaidik.s@frendy.in",
-                            ["nishi.g@frendy.in", "gowrav@frendy.in" ])
+                            from_user,
+                            recipient_list)
 
         with open(str(required_date)+'.csv') as f:
             data = f.read()

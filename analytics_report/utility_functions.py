@@ -112,12 +112,12 @@ def daily_report(required_date):
         # cwsdt = current week start date, cwedt = current week end date == yd_date
         cwedt = required_date
         if cwsdt == cwedt:
-            gross_ord_count_cw = SaleOrder.objects.filter(created_at__date=cwsdt).exclude(status__in=['Initiate']).count()
-            cancelled_ord_count_cw = SaleOrder.objects.filter(created_at__date=cwsdt).filter(status='Canceled').count()
+            gross_ord_count_cw = 0
+            cancelled_ord_count_cw = 0
             net_ord_count_cw = gross_ord_count_cw - cancelled_ord_count_cw
-            star_ord_count_cw = SaleOrder.objects.filter(created_at__date= cwsdt).filter(Q(keep_star_order=1) | Q(extra_info__contains={'activate_code': 1})).count()
-            gross_gmv_cw =SaleOrderItem.objects.filter(opd_master__created_at__date=cwsdt).exclude(opd_master__status__in=['Initiate']).aggregate(total=Sum('amount'))['total']
-            net_gmv_cw =SaleOrderItem.objects.filter(opd_master__created_at__date=cwsdt).exclude(opd_master__status__in=['Canceled']).exclude(opd_master__status__in=['Initiate']).aggregate(total=Sum('amount'))['total']
+            star_ord_count_cw = 0
+            gross_gmv_cw = 0
+            net_gmv_cw =0
             if gross_ord_count_cw == 0:
                 avg_gross_ord_value_cw = 0
                 gross_gmv_cw = 0

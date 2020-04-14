@@ -29,7 +29,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.tesst">
+  <component name="RunManager" selected="Python.tests">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="analytics" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -43,6 +43,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sql" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="analytics" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analytics_report" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analytics_report/sql.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -72,6 +93,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="analytics" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analytics_report" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analytics_report/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="utility_function" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="analytics" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -93,33 +135,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="analytics" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analytics_report" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analytics_report/views.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.sql" />
         <item itemvalue="Python.tesst" />
         <item itemvalue="Python.utility_function" />
         <item itemvalue="Python.manage" />
-        <item itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -145,30 +167,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="387" y="132" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585572353909" />
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1586755508126">
+    <state width="1344" height="283" key="GridCell.Tab.0.bottom" timestamp="1586871876020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586755508126" />
-    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1586755508126">
+    <state width="1344" height="283" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586871876020" />
+    <state width="1344" height="283" key="GridCell.Tab.0.center" timestamp="1586871876020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586755508126" />
-    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1586755508126">
+    <state width="1344" height="283" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586871876020" />
+    <state width="1344" height="283" key="GridCell.Tab.0.left" timestamp="1586871876020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586755508126" />
-    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1586755508126">
+    <state width="1344" height="283" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586871876020" />
+    <state width="1344" height="283" key="GridCell.Tab.0.right" timestamp="1586871876020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586755508126" />
+    <state width="1344" height="283" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586871876020" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1586338096834">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586338096834" />
-    <state x="384" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586752383618">
+    <state x="384" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586876450409">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="384" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586752383618" />
+    <state x="384" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586876450409" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1586280962514">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

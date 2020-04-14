@@ -27,7 +27,7 @@ SECRET_KEY = 'd(ilyjf1(t!i1&ab6d+qtv+!nrl0_r%u!h_j%m55&ry2w^0(p='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']               # '*' for production
 
 
 # Application definition
@@ -136,7 +136,10 @@ EMAIL_HOST_USER = 'vaidik.s@frendy.in'
 EMAIL_HOST_PASSWORD = '#vaidik123'
 EMAIL_PORT = 587
 
-CRONJOBS = ['0 12 * * *','analytics_report.cron.daily_report_cron_job'] # analytics_report.cron.daily_report_job
+
+CRONJOBS = [
+            ('0 3 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/cron_log.log")
+            ] # analytics_report.cron.daily_report_job
 
 
 # Static files (CSS, JavaScript, Images)
