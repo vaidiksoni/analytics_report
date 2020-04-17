@@ -5,6 +5,7 @@ from django.core.mail import EmailMessage
 from analytics_report.config import *
 import os
 import logging
+from analytics.settings import EMAIL_HOST_USER
 # Create your views here.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +15,7 @@ def send_daily_report(request):
         required_date = datetime.date.today()
         daily_report(required_date=required_date)
         mail = EmailMessage("Daily Report: Sale Performance","Please find the report dated: " + str(required_date),
-                            from_user,
+                            EMAIL_HOST_USER,
                             recipient_list)
 
         with open(str(required_date)+'.csv') as f:
@@ -22,6 +23,10 @@ def send_daily_report(request):
             mail.attach(str(required_date)+'.csv',data,"text/csv")
         mail.send(fail_silently=False)
         return render(request, 'send_daily_report.html')
+
     except Exception as e:
         logging.exception("Exception thrown: ", e)
 
+    finally:
+        if os.path.exists(str(required_date)+'.csv'):
+            os.remove(str(required_date)+'.csv')

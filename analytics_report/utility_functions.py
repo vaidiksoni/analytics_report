@@ -118,16 +118,9 @@ def daily_report(required_date):
             star_ord_count_cw = 0
             gross_gmv_cw = 0
             net_gmv_cw =0
-            if gross_ord_count_cw == 0:
-                avg_gross_ord_value_cw = 0
-                gross_gmv_cw = 0
-            else:
-                avg_gross_ord_value_cw = float(gross_gmv_cw)/float(gross_ord_count_cw)
-            if net_ord_count_cw == 0:
-                avg_net_ord_value_cw = 0
-                net_gmv_cw = 0
-            else:
-                avg_net_ord_value_cw = float(net_gmv_cw)/float(net_ord_count_cw)
+            avg_gross_ord_value_cw = 0
+            avg_net_ord_value_cw = 0
+
         else:
             gross_ord_count_cw = SaleOrder.objects.filter(created_at__range=[cwsdt, cwedt]).exclude(status__in=['Initiate']).count()
             cancelled_ord_count_cw = SaleOrder.objects.filter(created_at__range=[cwsdt, cwedt]).filter(status='Canceled').count()
@@ -247,8 +240,8 @@ def daily_report(required_date):
                  'target_achieved_compared_to_last_week', current_month, prev_month,  'total']]
 
         df.to_csv(str(required_date) + '.csv', index=False)  # export the DF to csv file
+
         ##SAVING THE DATAFRAME TO S3
-        df.to_csv(str(required_date) + '.csv', index=False)  # export the DF to csv file
         bucket = "frendy-autoreports"
         csv_buffer = StringIO()
         df.to_csv(csv_buffer, index=False)
@@ -264,3 +257,4 @@ def daily_report(required_date):
 
     finally:
         pass
+

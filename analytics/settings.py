@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'frendy-db-staging.cgz6bhdj3vqa.ap-south-1.rds.amazonaws.com',
         'OPTIONS': {
-            'read_default_file':  ('db_frendy.cnf'),
+            'read_default_file': 'db_frendy.cnf',
         },
     },
 }
@@ -114,13 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 CSRF_COOKIE_SECURE = False
 

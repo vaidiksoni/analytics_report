@@ -3,6 +3,8 @@ from analytics_report.utility_functions import daily_report
 import logging
 from django.core.mail import EmailMessage
 from analytics_report.config import *
+import os
+from analytics.settings import EMAIL_HOST_USER
 
 def daily_report_cron_job():
     try:
@@ -10,7 +12,7 @@ def daily_report_cron_job():
         required_date = datetime.date.today()
         daily_report(required_date=required_date)
         mail = EmailMessage("Daily Report: Sale Performance","Please find the report dated: " + str(required_date),
-                            from_user,
+                            EMAIL_HOST_USER,
                             recipient_list)
 
         with open(str(required_date)+'.csv') as f:
@@ -22,3 +24,7 @@ def daily_report_cron_job():
     except Exception as e:
         logging.exception("Exception thrown: ", e)
         print('Exception thrown at: ' + datetime.datetime.now() + ' as ', e)
+
+    finally:
+        if os.path.exists(str(required_date)+'.csv'):
+            os.remove(str(required_date)+'.csv')
