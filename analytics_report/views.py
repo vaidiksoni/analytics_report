@@ -30,3 +30,5 @@ def send_daily_report(request):
     finally:
         if os.path.exists(str(required_date)+'.csv'):
             os.remove(str(required_date)+'.csv')
+
+

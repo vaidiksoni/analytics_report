@@ -11,6 +11,7 @@ from io import StringIO
 import json
 import boto3
 
+
 def upload_files_to_s3(credential_file_path, s3_file_path, file_to_upload):
     """
         Function to upload a file to a s3 bucket
@@ -257,4 +258,3 @@ def daily_report(required_date):
 
     finally:
         pass
-

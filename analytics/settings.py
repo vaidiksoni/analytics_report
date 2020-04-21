@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -138,7 +138,7 @@ EMAIL_PORT = 587
 
 
 CRONJOBS = [
-            ('0 3 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/cron_log.log")
+            ('0 6 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/cron_log.log")
             ] # analytics_report.cron.daily_report_job
 
 

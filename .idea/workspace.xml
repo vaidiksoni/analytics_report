@@ -10,8 +10,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -167,22 +167,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="387" y="132" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585572353909" />
-    <state width="1344" height="127" key="GridCell.Tab.0.bottom" timestamp="1586978093294">
+    <state width="1344" height="127" key="GridCell.Tab.0.bottom" timestamp="1587313747093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="127" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586978093294" />
-    <state width="1344" height="127" key="GridCell.Tab.0.center" timestamp="1586978093294">
+    <state width="1344" height="127" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587313747093" />
+    <state width="1344" height="127" key="GridCell.Tab.0.center" timestamp="1587313747093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="127" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586978093294" />
-    <state width="1344" height="127" key="GridCell.Tab.0.left" timestamp="1586978093294">
+    <state width="1344" height="127" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587313747093" />
+    <state width="1344" height="127" key="GridCell.Tab.0.left" timestamp="1587313747092">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="127" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586978093294" />
-    <state width="1344" height="127" key="GridCell.Tab.0.right" timestamp="1586978093294">
+    <state width="1344" height="127" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587313747092" />
+    <state width="1344" height="127" key="GridCell.Tab.0.right" timestamp="1587313747093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="127" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586978093294" />
+    <state width="1344" height="127" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587313747093" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1586889651742">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
