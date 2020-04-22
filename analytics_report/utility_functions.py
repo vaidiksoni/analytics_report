@@ -10,6 +10,22 @@ import logging
 from io import StringIO
 import json
 import boto3
+from django.core.mail import EmailMessage
+import pymysql.cursors
+
+def send_mail(subject, body, sender, recipient, file_name):
+    """""Function to shoot email"""
+    try:
+        mail = EmailMessage(subject, body,
+                            sender,
+                            recipient)
+
+        with open(file_name) as f:
+            data = f.read()
+            mail.attach(file_name, data, "text/csv")
+        mail.send(fail_silently=False)
+    except Exception as e:
+        logging.exception("Exception thrown: ", e)
 
 
 def upload_files_to_s3(credential_file_path, s3_file_path, file_to_upload):
@@ -258,3 +274,106 @@ def daily_report(required_date):
 
     finally:
         pass
+
+
+def strip_lowercase(val):
+    """" to remove extra spaces from the category name and to lowercase it."""
+    return str(val).strip().lower()
+
+
+def category_report(required_date):
+    """return the category report as per the root categories"""
+    try:
+        cwsdt = required_date - datetime.timedelta(required_date.weekday())
+        pwsdt = cwsdt - datetime.timedelta(weeks=1)
+        pwedt = pwsdt + datetime.timedelta(weeks=1) - datetime.timedelta(days=1)
+        connection = pymysql.connect(read_default_file=r'db_frendy.cnf')
+        df = pd.read_sql("""
+            select sale_order.opd_number, sale_order_item.product_id, product.sku, sale_order.created_at, sale_order_item.status, sale_order_item.amount,
+                     sale_order_item.mrp, sale_order_item.frendy_price, sale_order_item.quantity,
+                     sale_order_item.product_points, sale_order_item.root_category, sale_order_item.primary_category
+            from sale_order_item 
+            inner join sale_order on sale_order.id = sale_order_item.opd_master_id
+            inner join product on product.id = sale_order_item.product_id
+            where sale_order.status != 'Initiate' and (cast(sale_order.created_at as date) between '""" + str(pwsdt) + """' and '""" + str(pwedt) + """'""" + """)""",
+            connection)
+
+        # Strip spaces and convert to lowercase to avoid inconsistency
+        df['root_category'] = df.root_category.transform(strip_lowercase)
+        df['primary_category'] = df.primary_category.transform(strip_lowercase)
+
+        # Addition of aggregated columns
+        df['total_frendy'] = df['amount'] + (df['product_points'] * df['quantity'])
+        df['savings'] = (df['mrp'] * df['quantity']) - df['total_frendy']
+        df['earnings'] = (df['total_frendy'] - df['amount']) * 2
+
+        # Category
+        categories = ['grocery', 'beauty', 'electronics', 'home & kitchen', 'fashion', 'stationery']
+        for category in categories:
+            df_category = df[df['root_category'] == category]
+            logistic = df_category['status'].value_counts()
+            logistic = pd.DataFrame(logistic).reset_index()
+            logistic.rename(columns={'index': 'logistic_status',
+                                     'status': ' order_count'}, inplace=True)
+
+            df_category = df_category[(df_category['status'] != 'Returned') & (df_category['status'] != 'Rto') & (
+                        df_category['status'] != 'Canceled')]
+
+            df_final = df_category.groupby(['primary_category'])[
+                'amount', 'product_points', 'savings', 'earnings'].sum().reset_index()
+
+            # Number of orders
+            orders = pd.DataFrame(df_category.groupby(['primary_category'])['opd_number'].nunique()).reset_index()
+            orders.rename(columns={'opd_number': 'order_count'}, inplace=True)
+
+            # number of quantity
+            quantity = pd.DataFrame(df_category['primary_category'].value_counts()).reset_index()
+            quantity.rename(columns={'primary_category': 'quantity',
+                                     'index': 'primary_category'}, inplace=True)
+            df_final = pd.merge(df_final, orders, on='primary_category')
+            df_final = pd.merge(df_final, quantity, on='primary_category')
+
+            # Grand Total
+            last_rows = pd.DataFrame({'primary_category': ['Grand Total'],
+                                      'amount': [df_final['amount'].sum()],
+                                      'product_points': [df_final['product_points'].sum()],
+                                      'savings': [df_final['savings'].sum()],
+                                      'earnings': [df_final['earnings'].sum()],
+                                      'order_count': [df_final['order_count'].sum()],
+                                      'quantity': [df_final['quantity'].sum()],
+                                      })
+
+            df_final = pd.concat([df_final, last_rows], axis=0, sort= False)
+            df_final = df_final.reset_index(drop=True)
+            df_final['POV'] = round((df_final['product_points'] / df_final['amount']) * 100)
+
+            # Top 20 SKU
+            top_20_sku_quant = pd.DataFrame(
+                df_category.groupby(['sku'])['quantity', 'amount'].sum().sort_values(by='quantity', ascending=False).head(
+                    20)).reset_index()
+            top_20_sku_quant.rename(columns={'sku': 'top_20_sku_quantitywise'}, inplace=True)
+
+            top_20_sku_amt = pd.DataFrame(
+                df_category.groupby(['sku'])['amount', 'quantity'].sum().sort_values(by='amount', ascending=False).head(
+                    20)).reset_index()
+            top_20_sku_amt.rename(columns={'sku': 'top_20_sku_amountwise',
+                                           'amount': 'sku_amount'}, inplace=True)
+
+            top_20_sku_value = df_category[['sku', 'frendy_price']].sort_values(by='frendy_price',
+                                                                                ascending=False).drop_duplicates(keep='first').head(20)
+            top_20_sku_value = pd.merge(top_20_sku_value, pd.DataFrame(df_category.groupby(['sku'])['quantity', 'amount'].sum()).reset_index(), on='sku')
+            top_20_sku_value.rename(columns={'sku': 'top_20_sku_value_wise'}, inplace=True)
+
+            df_final['-'] = ''
+            df_final = pd.concat([df_final, top_20_sku_quant], axis=1)
+            df_final['--'] = ''
+            df_final = pd.concat([df_final, top_20_sku_amt], axis=1)
+            df_final[' -- '] = ''
+            df_final = pd.concat([df_final, top_20_sku_value], axis=1)
+            df_final['  --'] = ''
+            df_final = pd.concat([df_final, logistic], axis=1)
+            df_final.to_csv(category + '_' + str(pwsdt) + '_' + str(pwedt) + '.csv', index= False)
+    except Exception as e:
+        logging.exception("Exception thrown: ", e)
+    finally:
+        connection.close()

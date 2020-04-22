@@ -138,9 +138,9 @@ EMAIL_PORT = 587
 
 
 CRONJOBS = [
-            ('0 6 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/cron_log.log")
-            ] # analytics_report.cron.daily_report_job
-
+            ('0 6 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/cron_log.log"),
+            ('0 7 * * *', 'analytics_report.cron.category_weekly_report_cron_job', ">> /var/log/py_report_engine/cron_log.log")
+            ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
