@@ -13,9 +13,9 @@ def daily_report_cron_job():
         # Email parameters
         subject_daily_report = "Daily Report: Sale Performance"
         body_daily_report = "Please find the report dated: " + str(required_date)
-        send_mail(subject=subject_daily_report, body=body_daily_report, sender=EMAIL_HOST_USER,
-                  recipient=recipient_list, \
-                  file_name=str(required_date) + '.csv')
+        daily_report_file = str(required_date) + '.csv'
+        send_mail(subject=subject_daily_report, body=body_daily_report, sender=EMAIL_HOST_USER, recipient=recipient_dict['daily_report'], \
+                  file_name=daily_report_file)
         print('INFO: CRON job for daily report has ended at: ', datetime.datetime.now())
 
     except Exception as e:
@@ -23,8 +23,8 @@ def daily_report_cron_job():
         print('Exception thrown at: ' + datetime.datetime.now() + ' as ', e)
 
     finally:
-        if os.path.exists(str(required_date)+'.csv'):
-            os.remove(str(required_date)+'.csv')
+        if os.path.exists(daily_report_file):
+            os.remove(daily_report_file)
 
 
 
@@ -36,19 +36,18 @@ def category_weekly_report_cron_job():
         cwsdt = required_date - datetime.timedelta(required_date.weekday())
         pwsdt = cwsdt - datetime.timedelta(weeks=1)
         pwedt = pwsdt + datetime.timedelta(weeks=1) - datetime.timedelta(days=1)
-
-        categories = ['grocery', 'beauty', 'electronics', 'home & kitchen', 'fashion', 'stationery']
-        for category in categories:
-            subject_category_report = "Category Weekly Report: " + category
-            body_category_report = "Please find the report for the week: " + str(pwsdt) + " to " + str(pwedt)
-            send_mail(subject= subject_category_report, body= body_category_report, sender= EMAIL_HOST_USER, recipient= recipient_list, \
-                      file_name= category + '_' + str(pwsdt) + '_' + str(pwedt) + '.csv')
+        # Email parameters
+        consolidated_file = "category_report_" + str(pwsdt) + "_" + str(pwedt) + ".xlsx"
+        subject_category_report = "Category Weekly Report For Week " + str(pwsdt.isocalendar()[1]) + ":" + " [" + str(pwsdt) \
+                                  + " - " + str(pwedt) + "]"
+        body_category_report = "Please find the report for the week: " + str(pwsdt) + " to " + str(pwedt)
+        send_mail(subject=subject_category_report, body=body_category_report, sender=EMAIL_HOST_USER, recipient=recipient_dict['category_report'], \
+                  file_name=consolidated_file)
         print('INFO: CRON job for weekly category report has ended at: ', datetime.datetime.now())
 
     except Exception as e:
         logging.exception("Exception thrown: ", e)
 
     finally:
-        for category in categories:
-            if os.path.exists(category + '_' + str(pwsdt) + '_' + str(pwedt) + '.csv'):
-                os.remove(category + '_' + str(pwsdt) + '_' + str(pwedt) + '.csv')
+        if os.path.exists(consolidated_file):
+            os.remove(consolidated_file)

@@ -12,6 +12,7 @@ import json
 import boto3
 from django.core.mail import EmailMessage
 import pymysql.cursors
+# import xlswriter
 
 def send_mail(subject, body, sender, recipient, file_name):
     """""Function to shoot email"""
@@ -20,9 +21,10 @@ def send_mail(subject, body, sender, recipient, file_name):
                             sender,
                             recipient)
 
-        with open(file_name) as f:
+        with open(file_name, 'rb') as f:
             data = f.read()
-            mail.attach(file_name, data, "text/csv")
+            # encoded_data = base64.b64encode(data)
+            mail.attach(file_name, data, "application/octet-stream")     #
         mail.send(fail_silently=False)
     except Exception as e:
         logging.exception("Exception thrown: ", e)
@@ -307,6 +309,9 @@ def category_report(required_date):
         df['savings'] = (df['mrp'] * df['quantity']) - df['total_frendy']
         df['earnings'] = (df['total_frendy'] - df['amount']) * 2
 
+        consolidated_file = "category_report_" + str(pwsdt) + "_" + str(pwedt) + ".xlsx"
+        writer = pd.ExcelWriter(consolidated_file, engine="xlsxwriter")
+
         # Category
         categories = ['grocery', 'beauty', 'electronics', 'home & kitchen', 'fashion', 'stationery']
         for category in categories:
@@ -372,7 +377,8 @@ def category_report(required_date):
             df_final = pd.concat([df_final, top_20_sku_value], axis=1)
             df_final['  --'] = ''
             df_final = pd.concat([df_final, logistic], axis=1)
-            df_final.to_csv(category + '_' + str(pwsdt) + '_' + str(pwedt) + '.csv', index= False)
+            df_final.to_excel(writer, sheet_name=category, index=False)
+        writer.save()
     except Exception as e:
         logging.exception("Exception thrown: ", e)
     finally:
