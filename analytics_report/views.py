@@ -33,7 +33,7 @@ def send_daily_report(request):
 
 def send_category_weekly_report(request):
     try:
-        required_date = datetime.date(2020,3,12)
+        required_date = datetime.date.today()
         category_report(required_date=required_date)
         cwsdt = required_date - datetime.timedelta(required_date.weekday())
         pwsdt = cwsdt - datetime.timedelta(weeks=1)

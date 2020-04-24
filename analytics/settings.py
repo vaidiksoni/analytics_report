@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'frendy-db-staging.cgz6bhdj3vqa.ap-south-1.rds.amazonaws.com',
         'OPTIONS': {
-            'read_default_file': 'db_frendy.cnf',
+            'read_default_file': os.path.join(BASE_DIR, 'db_frendy.cnf'),
         },
     },
 }
@@ -138,8 +138,8 @@ EMAIL_PORT = 587
 
 
 CRONJOBS = [
-            ('0 6 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/cron_log.log"),
-            ('0 7 * * *', 'analytics_report.cron.category_weekly_report_cron_job', ">> /var/log/py_report_engine/cron_log.log")
+            ('0 6 * * *','analytics_report.cron.daily_report_cron_job', ">> /var/log/py_report_engine/daily_report_cron_log.log"),
+            ('0 7 * * *', 'analytics_report.cron.category_weekly_report_cron_job', ">> /var/log/py_report_engine/category_report_cron_log.log")
             ]
 
 # Static files (CSS, JavaScript, Images)

@@ -47,6 +47,7 @@ def category_weekly_report_cron_job():
 
     except Exception as e:
         logging.exception("Exception thrown: ", e)
+        print('Exception thrown at: ' + datetime.datetime.now() + ' as ', e)
 
     finally:
         if os.path.exists(consolidated_file):

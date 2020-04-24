@@ -12,6 +12,8 @@ import json
 import boto3
 from django.core.mail import EmailMessage
 import pymysql.cursors
+import os
+from analytics.settings import BASE_DIR
 # import xlswriter
 
 def send_mail(subject, body, sender, recipient, file_name):
@@ -289,7 +291,7 @@ def category_report(required_date):
         cwsdt = required_date - datetime.timedelta(required_date.weekday())
         pwsdt = cwsdt - datetime.timedelta(weeks=1)
         pwedt = pwsdt + datetime.timedelta(weeks=1) - datetime.timedelta(days=1)
-        connection = pymysql.connect(read_default_file=r'db_frendy.cnf')
+        connection = pymysql.connect(read_default_file= os.path.join(BASE_DIR, 'db_frendy.cnf'))
         df = pd.read_sql("""
             select sale_order.opd_number, sale_order_item.product_id, product.sku, sale_order.created_at, sale_order_item.status, sale_order_item.amount,
                      sale_order_item.mrp, sale_order_item.frendy_price, sale_order_item.quantity,
